@@ -48,3 +48,24 @@ cd TG-MLGCN/
 
 python train.py --image_size 448 --epochs 20 --batchsize 16 --lr 0.001 --lrp 0.1 --msl True --checkpoint_interval 5 --log_interval 100 --val_interval 5
 ```
+
+### Tips
+Before you begin training, you need to create some folder and Modifying the file path because I didn't upload my weights.
+```sh
+-TG_MLGCN
+        |-word_embding
+                |-word_embding.npy
+        |-data
+                |-TG1
+                        |-anno
+                                |-train_no_rpt.json
+                                |-test_no_rpt.json
+                        |-img
+                                |-1.jpg
+                                |-2.jpg
+        |-glove.6B
+                |-resultFile
+                        |-glove.6B.300d.txt
+        |-checkpoint
+                |-TG
+```
