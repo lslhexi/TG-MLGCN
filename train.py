@@ -37,13 +37,11 @@ def main():
 
     model = TGGCNResnet(num_classes=num_classes, t=0.4, adj_file=r'data\TG1\anno\train_no_rpt.json')
     model = model.to(device)
-
-
-
-
-    # define loss function (criterion)
+    
+    # define loss function
     loss_fn = nn.MultiLabelSoftMarginLoss()
     loss_fn = loss_fn.cuda()
+    
     # define optimizer
     optimizer = torch.optim.SGD(model.get_config_optim(args.lr, args.lrp),
                                 lr=args.lr,
@@ -55,7 +53,7 @@ def main():
     train_dataloader = DataLoader(dataset=train_dataset,batch_size=args.batchsize,shuffle=True)
     val_dataloader = DataLoader(dataset=val_dataset, batch_size=args.batchsize, shuffle=False)
 
-    # 训练轮数
+    # epoch
     num_epochs = args.epochs
     checkpoint_interval=args.checkpoint_interval
     log_interval=args.log_interval
@@ -77,7 +75,7 @@ def main():
             if i % log_interval == 0:  # 每log_interval打印一次损失
                 print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i}/{len(train_dataloader)}], Loss: {running_loss / 10:.4f}'+',learning_rate: {}'.format(optimizer.param_groups[0]['lr']))
                 running_loss = 0.0
-        # 验证
+        # eval
         if epoch % args.val_interval == 0:
             model.eval()
             with torch.no_grad():
