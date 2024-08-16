@@ -31,11 +31,11 @@ def main():
 
     root=args.data
 
-    train_dataset = TGdata(root, img_size=args.image_size,phase='train', inp_name=r'word_embding\word_embding.npy')
-    val_dataset = TGdata(root, img_size=args.image_size,phase='test', inp_name=r'word_embding\word_embding.npy')
+    train_dataset = TGdata(root, img_size=args.image_size,phase='train', inp_name=r'word_embding/word_embding.npy')
+    val_dataset = TGdata(root, img_size=args.image_size,phase='test', inp_name=r'word_embding/word_embding.npy')
     num_classes = 20
 
-    model = TGGCNResnet(num_classes=num_classes, t=0.4, adj_file=r'data\TG1\anno\train_no_rpt.json')
+    model = TGGCNResnet(num_classes=num_classes, t=0.4, adj_file=r'data/TG1/anno/train_no_rpt.json')
     model = model.to(device)
     
     # define loss function
