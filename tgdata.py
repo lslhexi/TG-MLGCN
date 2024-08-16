@@ -22,7 +22,7 @@ class TGdata(data.Dataset):
         self.img_size=img_size
 
     def get_anno(self):
-        list_path=os.path.join(self.root, r'data\TG1\anno\{}_no_rpt.json'.format(self.phase))
+        list_path=os.path.join(self.root, r'data/TG1/anno/{}_no_rpt.json'.format(self.phase))
         anno = json.load(open(list_path, 'r'))
         self.img_list = anno["data_list"]
 
