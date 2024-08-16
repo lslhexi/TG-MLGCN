@@ -45,7 +45,8 @@ you can install the following packages:
 
 ```sh
 cd TG-MLGCN/
-
+```
+```sh
 python train.py --image_size 448 --epochs 20 --batchsize 16 --lr 0.001 --lrp 0.1 --msl True --checkpoint_interval 5 --log_interval 100 --val_interval 5
 ```
 
