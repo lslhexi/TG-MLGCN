@@ -99,7 +99,7 @@ def main():
 
         # 保存模型
         if epoch % checkpoint_interval ==0:
-            torch.save(model.state_dict(), 'checkpoint/TG/model_weights.pth')
+            torch.save(model.state_dict(), 'checkpoint/TG/model_weights_epoch{}.pth'.format(epoch))
 
 if __name__ == '__main__':
     main()
