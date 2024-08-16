@@ -3,7 +3,7 @@ import numpy as np
 import torch
 from torch.nn import Parameter
 
-def gen_A(num_classes, t=0.4, adj_file=r'D:\yolo\ML-GCN-master\data\TG1\anno\train_no_rpt.json'):
+def gen_A(num_classes, t=0.4, adj_file='data\TG1\anno\train_no_rpt.json'):
     '''
     计算共现标签矩阵
     :param num_classes:类别数量
