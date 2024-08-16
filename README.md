@@ -68,4 +68,5 @@ Before you begin training, you need to create some folder and Modifying the file
                         |-glove.6B.300d.txt
         |-checkpoint
                 |-TG
+                        |-epoch.pth
 ```
