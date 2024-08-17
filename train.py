@@ -30,7 +30,7 @@ def main():
     args = get_parser()
 
     root=args.data
-
+    # MLGCN的model默认img_size为448，若修改img_size大小会报错，因此需要一起修改tgmodels.py的pooling中的kernel_size
     train_dataset = TGdata(root, img_size=args.image_size,phase='train', inp_name=r'word_embding/word_embding.npy')
     val_dataset = TGdata(root, img_size=args.image_size,phase='test', inp_name=r'word_embding/word_embding.npy')
     num_classes = 20
