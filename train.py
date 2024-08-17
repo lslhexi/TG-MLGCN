@@ -48,7 +48,7 @@ def main():
                                 momentum=args.momentum,
                                 weight_decay=args.weight_decay)
     if args.MultiStepLR:
-        milestones = [args.epochs - 3]
+        milestones = [13,17]
         scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones, gamma=0.1, last_epoch=-1)
     train_dataloader = DataLoader(dataset=train_dataset,batch_size=args.batchsize,shuffle=True)
     val_dataloader = DataLoader(dataset=val_dataset, batch_size=args.batchsize, shuffle=False)
@@ -70,10 +70,9 @@ def main():
             loss.backward()
             optimizer.step()
             running_loss += loss.item()
-            if args.MultiStepLR:
-                scheduler.step()
             if i % log_interval == 0:  # 每log_interval打印一次损失
-                print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i}/{len(train_dataloader)}], Loss: {running_loss / 10:.4f}'+',learning_rate: {}'.format(optimizer.param_groups[0]['lr']))
+                #param_groups[0]是features的lr，param_groups[1]是gc1的
+                print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i}/{len(train_dataloader)}], Loss: {running_loss / 10:.4f}'+',learning_rate: {}'.format(optimizer.param_groups[1]['lr']))
                 running_loss = 0.0
         # eval
         if epoch % args.val_interval == 0:
@@ -95,7 +94,9 @@ def main():
                 all_labels = np.vstack(all_labels)
                 precision, recall, f1 = precision_recall_f1_at_k(all_outputs, all_labels, k=5)
                 print(f'Validation Loss after Epoch {epoch + 1}: {val_loss / len(val_dataset):.4f}')
-                print(f'Precision@5: {precision:.4f}, Recall@5: {recall:.4f}, F1-Score@5: {f1:.4f}')
+                print(f'Precision@5: {precision:.4f}, Recall@5: {recall:.4f}, F1-Score@5: {f1:.4f}'
+        if args.MultiStepLR:
+                scheduler.step()
 
         # 保存模型
         if epoch % checkpoint_interval ==0:
